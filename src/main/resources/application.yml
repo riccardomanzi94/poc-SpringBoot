@@ -1,0 +1,24 @@
+server:
+  port: 8082
+
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:POCSchema
+    username: sa
+    password: password
+    platform: org.hibernate.dialect.H2Dialect
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    show_sql : true
+    generate-ddl : true
+    hibernate:
+      ddl-auto : create
+
+logging:
+  level:
+    org.springframework.cache: DEBUG
+    web: DEBUG
