@@ -2,7 +2,6 @@ package it.demo.app.demo.service;
 
 import it.demo.app.demo.mapper.UtenteMapper;
 import it.demo.app.demo.model.dto.UtenteDto;
-import it.demo.app.demo.model.entitites.Utente;
 import it.demo.app.demo.repository.UtenteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +19,8 @@ public class UtenteService {
     @Autowired
     public UtenteMapper utenteMapper;
 
-    public List<Utente> list(){
-        return utenteRepository.findAll();
+    public List<UtenteDto> list(){
+        return utenteMapper.listToListDto(utenteRepository.findAll());
     }
 
     @Transactional

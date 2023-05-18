@@ -19,4 +19,7 @@ public class Utente implements Serializable {
     private String cognome;
     private String email;
 
+    @ManyToOne
+    private Articolo articolo;
+
 }

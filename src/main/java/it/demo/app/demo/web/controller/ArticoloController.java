@@ -2,9 +2,13 @@ package it.demo.app.demo.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import io.swagger.annotations.*;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
+import it.demo.app.demo.model.dto.ArticoloDto;
 import it.demo.app.demo.model.dto.UtenteDto;
-import it.demo.app.demo.service.UtenteService;
+import it.demo.app.demo.service.ArticoloService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -16,46 +20,49 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 @RequestMapping("/api/v1")
-public class UtenteController {
+public class ArticoloController {
 
     @Autowired
-    public UtenteService utenteService;
+    public ArticoloService articoloService;
 
     @Autowired
     public ObjectMapper objectMapper;
 
-    @GetMapping(value = "/get/utenti")
+    @GetMapping(value = "/get/articoli")
     @ApiOperation(
-            value = "Restituisce la lista degli Utenti presenti a sistema",
+            value = "Restituisce la lista degli Articoli presenti a sistema",
             authorizations = @Authorization(value = "basicAuth"))
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Operation successful"),
             @ApiResponse(code = 401, message = "Authentication information is missing or invalid")
     })
     public ResponseEntity<?> getAll(){
-        return new ResponseEntity<>(utenteService.list(), HttpStatus.OK);
+
+        return new ResponseEntity<>(articoloService.getAllArticoli(), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/aggiungiUtente")
+    @PostMapping(value = "/aggiungiArticolo")
     @ApiOperation(
-            value = "Inserimento Utente",
+            value = "Inserimento Articolo",
             authorizations = @Authorization(value = "basicAuth"))
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Operation successful"),
             @ApiResponse(code = 401, message = "Authentication information is missing or invalid")
     })
-    public ResponseEntity<?> addUser(@RequestBody UtenteDto utenteDto){
+    public ResponseEntity<?> addArticolo(@RequestBody ArticoloDto articoloDto){
 
-        utenteService.addUser(utenteDto);
+        articoloService.addArticolo(articoloDto);
 
         HttpHeaders headers = new HttpHeaders();
         ObjectNode responseNode = objectMapper.createObjectNode();
 
         headers.setContentType(MediaType.APPLICATION_JSON);
         responseNode.put("code",HttpStatus.OK.toString());
-        responseNode.put("message","Inserimento Utente : " + utenteDto.getCognome() + " avvenuta con successo !!! ");
+        responseNode.put("message","Inserimento Articolo : " + articoloDto.getNomeArticolo() + " avvenuta con successo !!! ");
 
         return new ResponseEntity<>(responseNode,HttpStatus.CREATED);
 
     }
+
+
 }
