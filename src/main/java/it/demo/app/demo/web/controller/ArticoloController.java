@@ -7,7 +7,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
 import it.demo.app.demo.model.dto.ArticoloDto;
-import it.demo.app.demo.model.dto.UtenteDto;
 import it.demo.app.demo.service.ArticoloService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
