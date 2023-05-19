@@ -9,6 +9,7 @@ import io.swagger.annotations.Authorization;
 import it.demo.app.demo.model.dto.ErrorDto;
 import it.demo.app.demo.model.dto.UtenteDto;
 import it.demo.app.demo.service.UtenteService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -50,7 +51,7 @@ public class UtenteController {
             @ApiResponse(code = 200, message = "Operation successful"),
             @ApiResponse(code = 401, message = "Authentication information is missing or invalid")
     })
-    public ResponseEntity<?> addUser(@RequestBody UtenteDto utenteDto){
+    public ResponseEntity<?> addUser(@Valid @RequestBody UtenteDto utenteDto){
 
         utenteService.addUser(utenteDto);
 
