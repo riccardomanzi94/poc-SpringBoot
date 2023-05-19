@@ -22,3 +22,8 @@ logging:
   level:
     org.springframework.cache: DEBUG
     web: DEBUG
+
+info:
+  app:
+    name: @project.artifactId@
+    version: @project.version@
